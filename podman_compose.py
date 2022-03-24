@@ -352,7 +352,6 @@ def assert_volume(compose, mount_dict):
         return
     proj_name = compose.project_name
     vol_name = vol["name"]
-    log(f"podman volume inspect {vol_name} || podman volume create {vol_name}")
     # TODO: might move to using "volume list"
     # podman volume list --format '{{.Name}}\t{{.MountPoint}}' -f 'label=io.podman.compose.project=HERE'
     try:
@@ -1025,7 +1024,6 @@ class Podman:
         cmd_args = cmd_args or []
         xargs = self.compose.get_podman_args(cmd) if cmd else []
         cmd_ls = [self.podman_path, *podman_args, cmd] + xargs + cmd_args
-        log(cmd_ls)
         return subprocess.check_output(cmd_ls)
 
     def exec(
@@ -1037,7 +1035,6 @@ class Podman:
         cmd_args = list(map(str, cmd_args or []))
         xargs = self.compose.get_podman_args(cmd) if cmd else []
         cmd_ls = [self.podman_path, *podman_args, cmd] + xargs + cmd_args
-        log(" ".join([str(i) for i in cmd_ls]))
         os.execlp(self.podman_path, *cmd_ls)
 
     def run(
@@ -1055,7 +1052,6 @@ class Podman:
         cmd_args = list(map(str, cmd_args or []))
         xargs = self.compose.get_podman_args(cmd) if cmd else []
         cmd_ls = [self.podman_path, *podman_args, cmd] + xargs + cmd_args
-        log(" ".join([str(i) for i in cmd_ls]))
         if self.dry_run:
             return None
         # subprocess.Popen(args, bufsize = 0, executable = None, stdin = None, stdout = None, stderr = None, preexec_fn = None, close_fds = False, shell = False, cwd = None, env = None, universal_newlines = False, startupinfo = None, creationflags = 0)
@@ -1073,7 +1069,6 @@ class Podman:
 
         if wait:
             exit_code = p.wait()
-            log("exit code:", exit_code)
             if obj is not None:
                 obj.exit_code = exit_code
 
