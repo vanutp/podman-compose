@@ -7,7 +7,7 @@ except:
     readme = ""
 
 setup(
-    name="podman-compose",
+    name="v-podman-compose",
     description="A script to run docker-compose.yml using podman",
     long_description=readme,
     long_description_content_type="text/markdown",
@@ -26,7 +26,7 @@ setup(
     keywords="podman, podman-compose",
     author="Muayyad Alsadi",
     author_email="alsadi@gmail.com",
-    url="https://github.com/containers/podman-compose",
+    url="https://github.com/vanutp/podman-compose",
     py_modules=["podman_compose"],
     entry_points={"console_scripts": ["podman-compose = podman_compose:main"]},
     include_package_data=True,
